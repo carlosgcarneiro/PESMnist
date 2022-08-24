@@ -25,7 +25,7 @@ class RunModels:
 
         for model in models:
             print(model + '\n')
-            print(classification_report(self.y_test, self.pred[model]))
+            print(classification_report(self.y_test, self.preds[model]))
         
     
     def conf_matrix(self, models: list[str] = None) -> None:
@@ -34,7 +34,7 @@ class RunModels:
         
         for model in models:
             print(model + '\n')
-            plot_confusion_matrix(self.train[model], self.X_test, self.y_test)
+            plot_confusion_matrix(self.trained_models[model], self.X_test, self.y_test)
 
             
         
