@@ -17,11 +17,12 @@ class RunModels:
     def train(self) -> None:
         self.trained_models = dict()
         self.preds = dict()
+
         for name, model in self.models.items():
             self.trained_models[name] = model.fit(self.X_train, self.y_train)
             self.preds[name] = model.predict(self.X_test)
     
-    def accuracy(self, models: list[str] = None) -> dict:
+    def accuracy(self) -> None:
         if not models:
             models = self.models.keys()
 
@@ -30,8 +31,13 @@ class RunModels:
                 self.X_test,
                 self.y_test,
             )
+    
+    def get_accuracy(self, models: list[str] = None) -> dict:
+        models_acc = dict()
+        for model in models:
+            models_acc[model] = self.scores[model]
         
-        return self.scores
+        return models_acc
 
     def report(self, models: list[str] = None) -> None:
         if not models:
