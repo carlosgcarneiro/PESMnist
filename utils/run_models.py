@@ -23,16 +23,16 @@ class RunModels:
             self.preds[name] = model.predict(self.X_test)
     
     def accuracy(self) -> None:
-        if not models:
-            models = self.models.keys()
-
-        for model in models:
+        for model in self.models:
             self.scores[model] = self.trained_models[model].score(
                 self.X_test,
                 self.y_test,
             )
     
     def get_accuracy(self, models: list[str] = None) -> dict:
+        if not models:
+            models = self.models.keys()
+
         models_acc = dict()
         for model in models:
             models_acc[model] = self.scores[model]
