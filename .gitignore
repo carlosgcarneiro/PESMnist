@@ -1,2 +1,3 @@
 *.arff
 *pycache*
+*checkpoint*
