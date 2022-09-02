@@ -137,6 +137,7 @@ class Results:
             axs[cls//5, cls%5].legend(loc="lower right", prop={'size': 6})
 
         fig.suptitle(f'{self.model_name} - ROC', fontsize='x-large')
+        fig.tight_layout()
 
         plt.savefig(f'graphs/{self.model_name}_roc.png')
         plt.show()
