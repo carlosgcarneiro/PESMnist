@@ -9,12 +9,12 @@ def MLP(input_shape, n_classes, n_neurons,
     
     model = Sequential()
     
-    first_layer_neurons = n_neurons.pop(0)
+    first_layer_neurons = n_neurons[0]
     model.add(Dense(first_layer_neurons, 
                 input_shape=input_shape,
                 activation=activation))
     
-    for n_neuron in n_neurons:
+    for n_neuron in n_neurons[1:]:
         model.add(Dense(n_neuron, activation=activation))
     model.add(Dense(n_classes, activation='softmax'))
     
