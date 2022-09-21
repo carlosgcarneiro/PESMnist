@@ -56,12 +56,12 @@ class Results:
         self.grid_results = grid_results
     
     def plot(self) -> None:
-        print(f"Resumo das métricas do modelo {self.model_name}\n")
+        print(f"Resumo das métricas do modelo {self.model_name}")
         print(f"Accurácia média (desvio): {np.mean(self.accuracy):.3f} ({np.std(self.accuracy):.3f})")
-        print(f"F1-Score média (desvio): {np.mean(self.f1):.3f} ({np.std(self.f1):.3f})")
+        print(f"F1-Score média (desvio): {np.mean(self.f1):.3f} ({np.std(self.f1):.3f})\n")
 
-        self.plot_cm()
-        self.plot_roc()
+        # self.plot_cm()
+        # self.plot_roc()
     
     def plot_cm(self):
         fig, ax = plt.subplots()
