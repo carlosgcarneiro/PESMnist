@@ -6,17 +6,12 @@ from keras.layers import Dense, Input
 
 class Encoder():
     
-    def __init__(self, reduce_amount=0.5):
+    def __init__(self, input_size, reduce_amount=0.5):
         self.reduce_amount = reduce_amount
-    
-    def fit(self, X, y=None):
-        self.input_size = X.shape[1]
+        self.input_size = input_size
         self.inputs = Input(shape=(self.input_size,))
 
-        scaler = StandardScaler()
-        X = scaler.fit_transform(X)
-        
-        hidden_size = int(round((X.shape[1]*self.reduce_amount),0))
+        hidden_size = int(round((self.input_size*self.reduce_amount),0))
         
         encoded = Dense(hidden_size, activation='sigmoid', name='encoded')(self.inputs)
         outputs = Dense(self.input_size, activation='linear')(encoded)
@@ -24,6 +19,11 @@ class Encoder():
         self.enc = Model(self.inputs, outputs)
         
         self.enc.compile(optimizer='adagrad', loss='binary_crossentropy')
+    
+    def fit(self, X, y=None):
+        scaler = StandardScaler()
+        X = scaler.fit_transform(X)
+
         self.enc.fit(
             X,X,
             batch_size=64,

@@ -10,6 +10,7 @@ def MLP(input_shape, n_classes, n_neurons,
     model = Sequential()
     
     first_layer_neurons = n_neurons[0]
+
     model.add(Dense(first_layer_neurons, 
                 input_shape=input_shape,
                 activation=activation))
