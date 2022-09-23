@@ -6,15 +6,15 @@ from keras.layers import Dense, Input
 
 class Encoder():
     
-    def __init__(self, input_size, reduce_amount=0.5):
-        self.reduce_amount = reduce_amount
+    def __init__(self, input_size, output_size):
+        self.output_size = output_size
         self.input_size = input_size
         self.inputs = Input(shape=(self.input_size,))
 
-        hidden_size = int(round((self.input_size*self.reduce_amount),0))
+        hidden_size = int(round((self.output_size),0))
         
-        encoded = Dense(hidden_size, activation='sigmoid', name='encoded')(self.inputs)
-        outputs = Dense(self.input_size, activation='linear')(encoded)
+        encoded = Dense(hidden_size, activation='linear', name='encoded')(self.inputs)
+        outputs = Dense(self.input_size, activation='sigmoid')(encoded)
         
         self.enc = Model(self.inputs, outputs)
         
@@ -26,8 +26,8 @@ class Encoder():
 
         self.enc.fit(
             X,X,
-            batch_size=64,
-            epochs=20,
+            batch_size=128,
+            epochs=5,
         )
 
         return self
